@@ -1,4 +1,5 @@
-﻿using AuroraOs.WebApi.Core.Filters;
+﻿using AuroraOs.Common.Core.Manager;
+using AuroraOs.WebApi.Core.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -48,9 +49,11 @@ namespace AuroraOs.WebApi.Core
 
         public void Configuration(IAppBuilder appBuilder)
         {
+            var manager = new AuroraManager();
+
             var config = new HttpConfiguration()
             {
-                DependencyResolver = new UnityDependencyResolver(new UnityConfig().Container.Value)
+                DependencyResolver = new UnityDependencyResolver(manager.Container)
             };
 
             AddFilters(config);

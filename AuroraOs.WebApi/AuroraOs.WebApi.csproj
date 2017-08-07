@@ -85,7 +85,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Core\Controllers\TestController.cs" />
     <Compile Include="Core\Extensions\HttpRequestMessageExtensions.cs" />
     <Compile Include="Core\Filters\ActionExecutedContext.cs" />
@@ -96,6 +95,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuroraOs.Common\AuroraOs.Common.csproj">
+      <Project>{0ef89b58-b02b-49c0-b8b1-0c57ac023cf6}</Project>
+      <Name>AuroraOs.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AuroraOs.Entities\AuroraOs.Entities.csproj">
+      <Project>{3139fad6-60b9-4c9e-87fd-6e7db6958d08}</Project>
+      <Name>AuroraOs.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
