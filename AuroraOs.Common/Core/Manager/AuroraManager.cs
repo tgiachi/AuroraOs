@@ -27,6 +27,9 @@ namespace AuroraOs.Common.Core.Manager
 
         private void Init()
         {
+            var cfg = ConfigManager.Instance;
+
+
             Container = new UnityContainer();
             _logger.Info("Scanning assemblies for services");
 
