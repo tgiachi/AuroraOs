@@ -16,18 +16,18 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 namespace AuroraOs.Engine.Core.Services
 {
     [AuroraService]
-    public class MqttService : IMqttService
+    public class MqttQueueClientService : IMqttQueueClientService
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         private MqttClient _mqttClient;
 
-        private readonly IEventBusService _eventBusService;
+        private readonly IEventQueueService _eventBusService;
 
         private static string CommandsTopic = "home.manager/system/commands/";
 
         private Dictionary<string, List<Action<string, string>>> _subcriptions = new Dictionary<string, List<Action<string, string>>>();
 
-        public MqttService(IEventBusService eventBusService)
+        public MqttQueueClientService(IEventQueueService eventBusService)
         {
 
             Init();
@@ -35,7 +35,7 @@ namespace AuroraOs.Engine.Core.Services
             _eventBusService = eventBusService;
 
 
-            _eventBusService.SubscribeAsync<MqttSendEvent>(_event =>
+            _eventBusService.Subscribe<MqttSendEvent>(_event =>
             {
                 if (_mqttClient.IsConnected)
                 {
@@ -50,8 +50,8 @@ namespace AuroraOs.Engine.Core.Services
 
         private void Init()
         {
-            var host = ConfigManager.Instance.GetConfigValue<MqttService>("mqtt_host", "test.mosquitto.org");
-            var port = int.Parse(ConfigManager.Instance.GetConfigValue<MqttService>("mqtt_port", "1883"));
+            var host = ConfigManager.Instance.GetConfigValue<MqttQueueClientService>("mqtt_host", "test.mosquitto.org");
+            var port = int.Parse(ConfigManager.Instance.GetConfigValue<MqttQueueClientService>("mqtt_port", "1883"));
 
             try
             {

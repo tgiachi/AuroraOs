@@ -18,6 +18,5 @@ namespace AuroraOs.Engine.Core.Interfaces
 
         GraphData GetDataSensor(string sensorName, DateTime fromDate, DateTime toDate);
 
-        bool InitSersorHandlers(List<Type> types);
     }
 }

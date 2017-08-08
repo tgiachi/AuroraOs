@@ -85,9 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AppUtils.cs" />
     <Compile Include="Core\Attributes\AuroraServiceAttribute.cs" />
     <Compile Include="Core\Attributes\MongoDocumentAttribute.cs" />
     <Compile Include="Core\Attributes\MongoIndexAttribute.cs" />
+    <Compile Include="Core\Attributes\SensorHandlerAttribute.cs" />
+    <Compile Include="Core\CoordinatesDistanceExtensions.cs" />
     <Compile Include="Core\Data\Config\AuroraConfig.cs" />
     <Compile Include="Core\Data\Dto\ConfigDto.cs" />
     <Compile Include="Core\Data\Dto\Coordinates.cs" />
@@ -97,7 +100,12 @@
     <Compile Include="Core\Data\Dto\OwnTracksLocation.cs" />
     <Compile Include="Core\Data\Dto\SensorAvaiableDto.cs" />
     <Compile Include="Core\Data\EmotionData.cs" />
+    <Compile Include="Core\Data\Errors\SensorError.cs" />
     <Compile Include="Core\Data\Events\MqttSendEvent.cs" />
+    <Compile Include="Core\Data\Events\MqttSendMessageEvent.cs" />
+    <Compile Include="Core\Data\Events\SensorAddedEvent.cs" />
+    <Compile Include="Core\Data\Events\SensorValueUpdateEvent.cs" />
+    <Compile Include="Core\Data\Events\ToggleSensorEvent.cs" />
     <Compile Include="Core\Data\IoT\Base\BaseIot.cs" />
     <Compile Include="Core\Data\IoT\Base\BaseMqtt.cs" />
     <Compile Include="Core\Data\IoT\Base\BaseSensor.cs" />
@@ -115,9 +123,10 @@
     <Compile Include="Core\Enums\AuroraServiceType.cs" />
     <Compile Include="Core\Interfaces\IAuroraService.cs" />
     <Compile Include="Core\Interfaces\IDelayedService.cs" />
+    <Compile Include="Core\Interfaces\ISensorHandler.cs" />
     <Compile Include="Core\Manager\AuroraManager.cs" />
-    <Compile Include="Core\Services\EventBusService.cs" />
-    <Compile Include="Core\Services\Interfaces\IEventBusService.cs" />
+    <Compile Include="Core\Services\EventQueueService.cs" />
+    <Compile Include="Core\Services\Interfaces\IEventQueueService.cs" />
     <Compile Include="Core\Services\Interfaces\INoSqlService.cs" />
     <Compile Include="Core\Services\Interfaces\ITaskSchedulerService.cs" />
     <Compile Include="Core\Services\NoSqlService.cs" />

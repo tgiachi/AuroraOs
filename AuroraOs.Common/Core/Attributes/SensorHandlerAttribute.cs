@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 namespace AuroraOs.Common.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class SensorHandlerAttribute : AuroraServiceAttribute
+    public class SensorHandlerAttribute : Attribute
     {
         public Type SensorType { get; set; }
 
         public SensorHandlerAttribute(Type sensorType)
         {
             SensorType = sensorType;
-            ServiceType = AuroraServiceType.Singleton;
         }
     }
 }

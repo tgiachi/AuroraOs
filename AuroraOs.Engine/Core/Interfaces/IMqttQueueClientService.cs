@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Engine.Core.Interfaces
 {
-    public interface IMqttService : IAuroraService
+    public interface IMqttQueueClientService : IAuroraService
     {
         void Subscribe(string topic, Action<string, string> action);
 

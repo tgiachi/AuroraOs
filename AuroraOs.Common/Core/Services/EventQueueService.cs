@@ -12,14 +12,14 @@ using AuroraOs.Common.Core.Attributes;
 namespace AuroraOs.Common.Core.Services
 {
     [AuroraService]
-    public class EventBusService : IEventBusService
+    public class EventQueueService : IEventQueueService
     {
 
         private readonly IMessageBus _messageBus;
         private ILogger _logger = LogManager.GetCurrentClassLogger();
 
        
-        public EventBusService()
+        public EventQueueService()
         {
             _logger.Info("Initializing message bus");
             _messageBus = new InMemoryMessageBus(new InMemoryMessageBusOptions());
@@ -27,21 +27,17 @@ namespace AuroraOs.Common.Core.Services
            
         }
 
-        
 
-        public Task PublishAsync(Type messageType, object message, TimeSpan? delay = default(TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
+        public bool Subscribe<T>(Action<T> action) where T : class
         {
-            return _messageBus.PublishAsync(messageType, message, delay, cancellationToken);
+            _messageBus.SubscribeAsync(action);
+
+            return true;
         }
 
-        public Task PublishAsync<T>(T message, TimeSpan? delay = default(TimeSpan?)) where T : class
+        public async Task Publish<T>(T obj) where T : class
         {
-            return _messageBus.PublishAsync(message, delay);
-        }
-
-        public Task SubscribeAsync<T>(Action<T> handler) where T : class
-        {
-            return _messageBus.SubscribeAsync(handler);
+            await _messageBus.PublishAsync(obj);
         }
 
         public void Dispose()

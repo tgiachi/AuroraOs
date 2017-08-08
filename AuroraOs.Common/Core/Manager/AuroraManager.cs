@@ -16,7 +16,7 @@ namespace AuroraOs.Common.Core.Manager
     {
         private ILogger _logger = LogManager.GetCurrentClassLogger();
         private List<Type> _delayedServices = new List<Type>();
-
+        private List<Type> _singletonServices = new List<Type>();
 
         public IUnityContainer Container { get; set; }
 
@@ -31,6 +31,8 @@ namespace AuroraOs.Common.Core.Manager
 
 
             Container = new UnityContainer();
+            Container.RegisterInstance<IUnityContainer>(Container);
+
             _logger.Info("Scanning assemblies for services");
 
 
@@ -52,6 +54,8 @@ namespace AuroraOs.Common.Core.Manager
 
         private void StartDelayedServices()
         {
+            _singletonServices.ForEach(s => Container.Resolve(s));
+
             _delayedServices.ForEach(async service =>
             {
                 try
@@ -100,7 +104,8 @@ namespace AuroraOs.Common.Core.Manager
                 }
 
                 if (serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
-                    Container.Resolve(type);
+                    _singletonServices.Add(type);
+
 
                 if (serviceAttribute.StartAtStartup && serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                 {
