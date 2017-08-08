@@ -80,9 +80,9 @@ namespace AuroraOs.Engine.Core.Services
 
             var text = "";
 
-            if (message is string strMessage)
+            if (message is string)
             {
-                text = strMessage;
+                text = message as string;
             }
             else
             {
