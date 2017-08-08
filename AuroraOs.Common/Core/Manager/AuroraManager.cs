@@ -56,9 +56,12 @@ namespace AuroraOs.Common.Core.Manager
             {
                 try
                 {
-                    var srv = Container.Resolve(service) as IAuroraService;
+                    var srv = Container.Resolve(service) as IDelayedService;
 
-                    await srv?.Start();
+                    if (srv != null)
+                        await srv?.Start();
+                    else
+                        _logger.Warn($"Service {service.Name} not implement IDelayedService interface");
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +89,18 @@ namespace AuroraOs.Common.Core.Manager
 
                 _logger.Debug($"Registering {type.Name} as {serviceAttribute.ServiceType}");
 
-                Container.RegisterType(type, ltm);
+
+                if (type.GetInterfaces().Count() > 0)
+                {
+                    Container.RegisterType(type.GetInterfaces()[0], type, ltm);
+                }
+                else
+                {
+                    Container.RegisterType(type, ltm);
+                }
+
+                if (serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
+                    Container.Resolve(type);
 
                 if (serviceAttribute.StartAtStartup && serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                 {

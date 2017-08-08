@@ -17,9 +17,9 @@ namespace AuroraOs.Service
             {
                 x.Service<HostingConfiguration>();
                 x.RunAsLocalSystem();
-                x.SetDescription("Owin + Webapi as Windows service");
-                x.SetDisplayName("owin.webapi.test");
-                x.SetServiceName("owin.webapi.test");
+                x.SetDescription("Aurora OS Service");
+                x.SetDisplayName("AuroraOs.Service");
+                x.SetServiceName("AuroraOs.Service");
             });
 
             return (int)exitCode;

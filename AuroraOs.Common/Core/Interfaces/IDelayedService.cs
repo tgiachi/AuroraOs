@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Common.Core.Interfaces
 {
-    public interface IAuroraService : IDisposable
+    public interface IDelayedService
     {
-      
+        Task Start();
     }
 }
