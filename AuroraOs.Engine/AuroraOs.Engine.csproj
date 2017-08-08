@@ -81,7 +81,6 @@
   <ItemGroup>
     <Compile Include="Core\Interfaces\IMqttService.cs" />
     <Compile Include="Core\Services\MqttService.cs" />
-    <Compile Include="Core\Services\TestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -100,6 +100,11 @@ namespace AuroraOs.Common.Core.Services
             return attr.CollectionName;
         }
 
+        public List<T> SelectAll<T>()
+        {
+            return _database.GetCollection<T>(GetCollectionByName<T>()).AsQueryable<T>().ToList();
+        }
+
 
         public void Dispose()
         {

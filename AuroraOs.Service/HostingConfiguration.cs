@@ -1,5 +1,6 @@
 ﻿using AuroraOs.Web.Api.Core;
 using Microsoft.Owin.Hosting;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,8 +17,10 @@ namespace AuroraOs.Service
 
         public bool Start(HostControl hostControl)
         {
+            var address = "http://localhost:9000";
             Trace.WriteLine("Starting the service");
-            _webApplication = WebApp.Start<Startup>("http://localhost:9000");
+            _webApplication = WebApp.Start<Startup>(address);
+            LogManager.GetCurrentClassLogger().Info($"Listening {address}");
             return true;
         }
 

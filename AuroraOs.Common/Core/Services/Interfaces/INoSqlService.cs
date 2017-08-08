@@ -17,5 +17,7 @@ namespace AuroraOs.Common.Core.Services.Interfaces
         List<T> Select<T>(Expression<Func<T, bool>> func);
 
         long Delete<T>(Expression<Func<T, bool>> func);
+
+        List<T> SelectAll<T>();
     }
 }
