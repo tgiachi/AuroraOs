@@ -1,5 +1,6 @@
 ﻿using AuroraOs.Common.Core.Manager;
-using AuroraOs.WebApi.Core.Filters;
+using AuroraOs.Web.Api.Core.Filters;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Unity.WebApi;
 
-namespace AuroraOs.WebApi.Core
+namespace AuroraOs.Web.Api.Core
 {
     /// <summary>
     /// Startup class for OWIN

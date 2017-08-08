@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace AuroraOs.WebApi.Core.Controllers
+namespace AuroraOs.Web.Api.Core.Controllers
 {
     public class TestController : ApiController
     {

@@ -1,4 +1,4 @@
-﻿using AuroraOs.WebApi.Core.Extensions;
+﻿using AuroraOs.Web.Api.Core.Extensions;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
-namespace AuroraOs.WebApi.Core.Filters
+namespace AuroraOs.Web.Api.Core.Filters
 {
     public class LoggingFilterAttribute : ActionFilterAttribute
     {

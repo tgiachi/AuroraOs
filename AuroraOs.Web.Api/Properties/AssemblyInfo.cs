@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AuroraOs.WebApi")]
+[assembly: AssemblyTitle("AuroraOs.Web.Api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AuroraOs.WebApi")]
+[assembly: AssemblyProduct("AuroraOs.Web.Api")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0558e43f-a926-4167-aeff-1936ea49b6d1")]
+[assembly: Guid("25af7d02-78d9-4c19-869c-93c37ba8813e")]
 
 // Version information for an assembly consists of the following four values:
 //

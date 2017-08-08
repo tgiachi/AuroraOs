@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuroraOs.WebApi.Core.Extensions
+namespace AuroraOs.Web.Api.Core.Extensions
 {
     public static class HttpRequestMessageExtensions
     {
