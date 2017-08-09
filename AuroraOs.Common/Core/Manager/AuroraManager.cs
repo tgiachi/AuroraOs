@@ -96,7 +96,9 @@ namespace AuroraOs.Common.Core.Manager
 
                 if (type.GetInterfaces().Count() > 0)
                 {
-                    Container.RegisterType(type.GetInterfaces()[0], type, ltm);
+                    var inter = type.GetInterfaces().FirstOrDefault(s => s.Name.Contains(type.Name));
+
+                    Container.RegisterType(inter, type, ltm);
                 }
                 else
                 {

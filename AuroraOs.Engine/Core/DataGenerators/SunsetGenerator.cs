@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Engine.Core.DataGenerators
 {
-   // [DataGeneratorInfo(3600)]
+    [DataGeneratorInfo(3600)]
     public class SunsetGenerator : IDataGenerator
     {
         private HttpClient _httpClient;
