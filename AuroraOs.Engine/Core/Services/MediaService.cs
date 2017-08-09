@@ -30,8 +30,6 @@ namespace AuroraOs.Engine.Core.Services
             _taskScheduler = taskScheduler;
 
             Init();
-
-            ScanDirectory(@"/media/Data2/MP3");
         }
 
         private void Init()
@@ -75,6 +73,8 @@ namespace AuroraOs.Engine.Core.Services
         {
             try
             {
+                _logger.Info($"Starting scanning to directory {directory}");
+
                 var files = Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories);
 
                 foreach(var file in files)

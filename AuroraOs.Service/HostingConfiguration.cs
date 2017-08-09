@@ -17,7 +17,7 @@ namespace AuroraOs.Service
 
         public bool Start(HostControl hostControl)
         {
-            var address = "http://*:9000";
+            var address = "http://127.0.0.1:9001";
             Trace.WriteLine("Starting the service");
             _webApplication = WebApp.Start<Startup>(address);
             LogManager.GetCurrentClassLogger().Info($"Listening {address}");

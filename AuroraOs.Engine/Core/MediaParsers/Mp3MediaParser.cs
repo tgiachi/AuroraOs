@@ -35,10 +35,6 @@ namespace AuroraOs.Engine.Core.MediaParsers
         public Task<bool> Parse(string filename)
         {
 
-            //TagLib.File.Create(new StreamFileAbstraction())
-
-
-
             try
             {
                 using (var fs = new FileStream(filename, FileMode.Open))
