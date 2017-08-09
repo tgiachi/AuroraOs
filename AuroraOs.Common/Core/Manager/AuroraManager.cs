@@ -89,7 +89,7 @@ namespace AuroraOs.Common.Core.Manager
                 if (serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                     ltm = new ContainerControlledLifetimeManager();
                 else
-                    ltm = new PerResolveLifetimeManager();
+                    ltm = new ContainerControlledLifetimeManager();
 
                 _logger.Debug($"Registering {type.Name} as {serviceAttribute.ServiceType}");
 
