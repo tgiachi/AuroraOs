@@ -1,4 +1,5 @@
 ﻿using AuroraOs.Common.Core.Attributes;
+using AuroraOs.Common.Core.Entities;
 using AuroraOs.Common.Core.Manager;
 using AuroraOs.Common.Core.Services.Interfaces;
 using MongoDB.Driver;
@@ -69,18 +70,32 @@ namespace AuroraOs.Common.Core.Services
         }
 
 
-        public void Insert<T>(T obj)
+        public void Insert<T>(T obj) where T : BaseNoSqlEntity
         {
-            _database.GetCollection<T>(GetCollectionByName<T>()).InsertOne(obj);
+            try
+            {
+                _database.GetCollection<T>(GetCollectionByName<T>()).InsertOne(obj);
+            }
+            catch
+            {
+                Update<T>(obj);
+
+            }
+          
         }
 
-        public long Delete<T>(Expression<Func<T, bool>> func)
+        public void Update<T>(T obj) where T: BaseNoSqlEntity
+        {
+            _database.GetCollection<T>(GetCollectionByName<T>()).ReplaceOne(e => e.Id == obj.Id, obj);
+        }
+
+        public long Delete<T>(Expression<Func<T, bool>> func) where T : BaseNoSqlEntity
         {
             var dr = _database.GetCollection<T>(GetCollectionByName<T>()).DeleteMany(func);
             return dr.DeletedCount;
         }
 
-        public void Insert<T>(IEnumerable<T> list)
+        public void Insert<T>(IEnumerable<T> list) where T : BaseNoSqlEntity
         {
             _database.GetCollection<T>(GetCollectionByName<T>()).InsertMany(list);
         }

@@ -30,8 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Chroniton, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chroniton.1.0.3.3\lib\net46\Chroniton.dll</HintPath>
+    </Reference>
     <Reference Include="Foundatio, Version=5.1.1474.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foundatio.5.1.1474\lib\net46\Foundatio.dll</HintPath>
+    </Reference>
+    <Reference Include="jint, Version=2.10.4.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\jint.2.10.4\lib\net45\jint.dll</HintPath>
     </Reference>
     <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
@@ -70,7 +76,7 @@
       <HintPath>..\packages\Nito.Disposables.1.1.0\lib\portable45-net45+win8+wp8+wpa81\Nito.Disposables.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.11\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -79,18 +85,29 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.Contracts" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Net.Security, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Security.4.3.1\lib\net46\System.Net.Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TheCollective, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TheCollective.1.0.1\lib\net452\TheCollective.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DataGenerators\SunsetGenerator.cs" />
+    <Compile Include="Core\Interfaces\IDataService.cs" />
     <Compile Include="Core\Interfaces\IEmotionService.cs" />
     <Compile Include="Core\Interfaces\IJsService.cs" />
     <Compile Include="Core\Interfaces\IMqttQueueClientService.cs" />
@@ -100,7 +117,11 @@
     <Compile Include="Core\SensorsHandlers\MqttSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSwitchHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttTimedSwitchHandler.cs" />
+    <Compile Include="Core\Services\DataService.cs" />
+    <Compile Include="Core\Services\EmotionService.cs" />
+    <Compile Include="Core\Services\JsService.cs" />
     <Compile Include="Core\Services\MqttService.cs" />
+    <Compile Include="Core\Services\SceneService.cs" />
     <Compile Include="Core\Services\SensorsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

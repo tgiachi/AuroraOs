@@ -70,7 +70,7 @@
       <HintPath>..\packages\Nito.Disposables.1.1.0\lib\portable45-net45+win8+wp8+wpa81\Nito.Disposables.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.11\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -78,6 +78,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Core\AppUtils.cs" />
     <Compile Include="Core\Attributes\AuroraServiceAttribute.cs" />
+    <Compile Include="Core\Attributes\DataGeneratorInfoAttribute.cs" />
     <Compile Include="Core\Attributes\MongoDocumentAttribute.cs" />
     <Compile Include="Core\Attributes\MongoIndexAttribute.cs" />
     <Compile Include="Core\Attributes\SensorHandlerAttribute.cs" />
@@ -120,12 +124,14 @@
     <Compile Include="Core\Data\IoT\Scene\TriggerComparatorEnum.cs" />
     <Compile Include="Core\Data\SunsetData.cs" />
     <Compile Include="Core\Data\SunsetDataResults.cs" />
+    <Compile Include="Core\Entities\BaseNoSqlEntity.cs" />
     <Compile Include="Core\Enums\AuroraServiceType.cs" />
     <Compile Include="Core\Interfaces\IAuroraService.cs" />
     <Compile Include="Core\Interfaces\IDelayedService.cs" />
     <Compile Include="Core\Interfaces\ISensorHandler.cs" />
     <Compile Include="Core\Manager\AuroraManager.cs" />
     <Compile Include="Core\Services\EventQueueService.cs" />
+    <Compile Include="Core\Services\Interfaces\IDataGenerator.cs" />
     <Compile Include="Core\Services\Interfaces\IEventQueueService.cs" />
     <Compile Include="Core\Services\Interfaces\INoSqlService.cs" />
     <Compile Include="Core\Services\Interfaces\ITaskSchedulerService.cs" />

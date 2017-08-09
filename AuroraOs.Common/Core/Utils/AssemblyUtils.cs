@@ -30,12 +30,14 @@ namespace AuroraOs.Common.Core.Utils
                     if (type.GetCustomAttributes(attributeType, true).Length > 0)
                         list.Add(type);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
 
             return list;
         }
+
+      
 
         /// <summary>
         ///     Restituisce il tipo controllando tutti gli assembly
