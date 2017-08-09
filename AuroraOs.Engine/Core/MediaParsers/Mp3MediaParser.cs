@@ -1,5 +1,6 @@
 ﻿using AuroraOs.Common.Core.Attributes;
 using AuroraOs.Common.Core.Interfaces;
+using AuroraOs.Entities.Core.Repositories.Interfaces;
 using Id3;
 using NLog;
 using System;
@@ -15,7 +16,16 @@ namespace AuroraOs.Engine.Core.MediaParsers
     [MediaServiceType("mp3")]
     public class Mp3MediaParser : IMediaParser
     {
+        private readonly IAudioEntityRepository _audioRepo;
+
         private ILogger _logger = LogManager.GetCurrentClassLogger();
+
+        public Mp3MediaParser(IAudioEntityRepository audioRepo)
+        {
+            _audioRepo = audioRepo;
+        }
+
+        
 
         public Task<bool> Parse(string filename)
         {
@@ -25,7 +35,9 @@ namespace AuroraOs.Engine.Core.MediaParsers
                 {
                     var tag = mp3.GetTag(Id3TagFamily.Version2x);
 
-                    _logger.Info($"{tag.Artists.Value.FirstOrDefault()} - {tag.Title.Value.FirstOrDefault()}"); 
+                    _logger.Info($"{tag.Artists.Value.FirstOrDefault()} - {tag.Track.Value}");
+
+                    _audioRepo.AddAudioEntity(filename, tag.Artists.Value.FirstOrDefault(),tag.Title.Value , tag.Album.Value, tag.Length.Value);
 
                 }
                 return Task.FromResult(true);

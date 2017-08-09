@@ -55,9 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Entities\AudioEntity.cs" />
     <Compile Include="Core\Entities\ConfigValue.cs" />
     <Compile Include="Core\Entities\SensorsValue.cs" />
+    <Compile Include="Core\Repositories\AudioEntityRepository.cs" />
     <Compile Include="Core\Repositories\ConfigValuesRepository.cs" />
+    <Compile Include="Core\Repositories\Interfaces\IAudioEntityRepository.cs" />
     <Compile Include="Core\Repositories\Interfaces\IConfigValuesRepository.cs" />
     <Compile Include="Core\Repositories\Interfaces\ISensorValuesRepository.cs" />
     <Compile Include="Core\Repositories\SensorValuesRepository.cs" />
