@@ -36,6 +36,9 @@
     <Reference Include="Foundatio, Version=5.1.1474.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foundatio.5.1.1474\lib\net46\Foundatio.dll</HintPath>
     </Reference>
+    <Reference Include="Id3, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ID3.0.4.0-beta\lib\net40\Id3.dll</HintPath>
+    </Reference>
     <Reference Include="jint, Version=2.10.4.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\jint.2.10.4\lib\net45\jint.dll</HintPath>
     </Reference>
@@ -110,9 +113,12 @@
     <Compile Include="Core\Interfaces\IDataService.cs" />
     <Compile Include="Core\Interfaces\IEmotionService.cs" />
     <Compile Include="Core\Interfaces\IJsService.cs" />
+    <Compile Include="Core\Interfaces\IMediaService.cs" />
     <Compile Include="Core\Interfaces\IMqttQueueClientService.cs" />
     <Compile Include="Core\Interfaces\ISceneService.cs" />
     <Compile Include="Core\Interfaces\ISensorsService.cs" />
+    <Compile Include="Core\MediaParsers\Mp3MediaParser.cs" />
+    <Compile Include="Core\MediaParsers\TextMediaParser.cs" />
     <Compile Include="Core\SensorsHandlers\MqttLocationSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSwitchHandler.cs" />
@@ -120,6 +126,7 @@
     <Compile Include="Core\Services\DataService.cs" />
     <Compile Include="Core\Services\EmotionService.cs" />
     <Compile Include="Core\Services\JsService.cs" />
+    <Compile Include="Core\Services\MediaService.cs" />
     <Compile Include="Core\Services\MqttService.cs" />
     <Compile Include="Core\Services\SceneService.cs" />
     <Compile Include="Core\Services\SensorsService.cs" />

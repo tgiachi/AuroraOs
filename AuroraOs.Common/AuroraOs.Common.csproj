@@ -91,6 +91,7 @@
     <Compile Include="Core\AppUtils.cs" />
     <Compile Include="Core\Attributes\AuroraServiceAttribute.cs" />
     <Compile Include="Core\Attributes\DataGeneratorInfoAttribute.cs" />
+    <Compile Include="Core\Attributes\MediaServiceTypeAttribute.cs" />
     <Compile Include="Core\Attributes\MongoDocumentAttribute.cs" />
     <Compile Include="Core\Attributes\MongoIndexAttribute.cs" />
     <Compile Include="Core\Attributes\SensorHandlerAttribute.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Core\Enums\AuroraServiceType.cs" />
     <Compile Include="Core\Interfaces\IAuroraService.cs" />
     <Compile Include="Core\Interfaces\IDelayedService.cs" />
+    <Compile Include="Core\Interfaces\IMediaParser.cs" />
     <Compile Include="Core\Interfaces\ISensorHandler.cs" />
     <Compile Include="Core\Manager\AuroraManager.cs" />
     <Compile Include="Core\Services\EventQueueService.cs" />

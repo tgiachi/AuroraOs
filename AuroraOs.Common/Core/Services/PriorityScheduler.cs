@@ -61,7 +61,7 @@ namespace AuroraOs.Common.Core.Services
                     _threads[i] = new Thread(() =>
                     {
                         foreach (Task t in _tasks.GetConsumingEnumerable())
-                            TryExecuteTask(t);
+                            TryExecuteTaskInline(t, true);
                     })
                     {
                         Name = string.Format("PriorityScheduler: ", i),
@@ -80,7 +80,7 @@ namespace AuroraOs.Common.Core.Services
 
         public void Dispose()
         {
-            
+
         }
     }
 }

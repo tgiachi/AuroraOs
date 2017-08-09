@@ -10,7 +10,7 @@ namespace AuroraOs.Common.Core.Services.Interfaces
 {
     public interface ITaskSchedulerService : IAuroraService
     {
-        void QueueTask(Task task, ThreadPriority priority);
+        void QueueTask(Task task, ThreadPriority priority = ThreadPriority.Normal);
 
     }
 }
