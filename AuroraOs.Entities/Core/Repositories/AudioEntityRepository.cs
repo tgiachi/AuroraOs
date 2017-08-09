@@ -19,17 +19,24 @@ namespace AuroraOs.Entities.Core.Repositories
         private readonly INoSqlService _dbContext;
 
 
-        public void AddAudioEntity(string filename, string artist, string title, string albumName, TimeSpan duration)
+        public void AddAudioEntity(string filename, string artist, string title, string albumName, TimeSpan duration, string genre = "", int? year = null)
         {
-            _dbContext.Insert(new AudioEntity()
+            var ent = new AudioEntity()
             {
                 Artist = artist,
                 AlbumName = albumName,
                 Title = title,
                 Duration = duration,
+                Genre = genre,
+
                 Filename = filename
 
-            });
+            };
+
+            if (year.HasValue)
+                ent.Year = year.Value;
+
+            _dbContext.Insert(ent);
         }
     }
 }

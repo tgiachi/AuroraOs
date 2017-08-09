@@ -36,9 +36,6 @@
     <Reference Include="Foundatio, Version=5.1.1474.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foundatio.5.1.1474\lib\net46\Foundatio.dll</HintPath>
     </Reference>
-    <Reference Include="Id3, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ID3.0.4.0-beta\lib\net40\Id3.dll</HintPath>
-    </Reference>
     <Reference Include="jint, Version=2.10.4.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\jint.2.10.4\lib\net45\jint.dll</HintPath>
     </Reference>
@@ -104,6 +101,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TagLib.Portable, Version=2.2.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>..\packages\TagLib.Portable.1.0.4\lib\portable-net45+win+wpa81+wp8+MonoAndroid10+xamarinios10+MonoTouch10\TagLib.Portable.dll</HintPath>
+    </Reference>
     <Reference Include="TheCollective, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TheCollective.1.0.1\lib\net452\TheCollective.dll</HintPath>
     </Reference>

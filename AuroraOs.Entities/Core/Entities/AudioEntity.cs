@@ -16,7 +16,11 @@ namespace AuroraOs.Entities.Core.Entities
 
         public string Title { get; set; }
 
-        public TimeSpan Duration { get; set; }
+      
+
+        public int Year { get; set; }
+
+        public string Genre { get; set; }
 
         public string Filename { get; set; }
     }

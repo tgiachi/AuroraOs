@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TagLib;
 
 namespace AuroraOs.Engine.Core.MediaParsers
 {
@@ -25,21 +25,28 @@ namespace AuroraOs.Engine.Core.MediaParsers
             _audioRepo = audioRepo;
         }
 
-        
+
 
         public Task<bool> Parse(string filename)
         {
+
+            //TagLib.File.Create(new StreamFileAbstraction())
+
+
+
             try
             {
-                using (var mp3 = new Mp3Stream(File.ReadAllBytes(filename)))
+                using (var fs = new FileStream(filename, FileMode.Open))
                 {
-                    var tag = mp3.GetTag(Id3TagFamily.Version2x);
+                    var tagFile = TagLib.File.Create(new StreamFileAbstraction(filename, fs, fs));
 
-                    _logger.Info($"{tag.Artists.Value.FirstOrDefault()} - {tag.Track.Value}");
+                    var tags = tagFile.GetTag(TagTypes.Id3v2);
 
-                    _audioRepo.AddAudioEntity(filename, tag.Artists.Value.FirstOrDefault(),tag.Title.Value , tag.Album.Value, tag.Length.Value);
+                    _audioRepo.AddAudioEntity(filename, tags.FirstAlbumArtist, tags.Title, tags.Album, tags.FirstGenre, (int)tags.Year);
 
+                    _logger.Info($"{tags.FirstAlbumArtist} - {tags.Title}");
                 }
+
                 return Task.FromResult(true);
 
             }

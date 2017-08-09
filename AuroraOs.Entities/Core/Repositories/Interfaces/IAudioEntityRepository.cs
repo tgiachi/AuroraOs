@@ -8,6 +8,6 @@ namespace AuroraOs.Entities.Core.Repositories.Interfaces
 {
     public interface IAudioEntityRepository
     {
-        void AddAudioEntity(string filename, string artist, string title, string albumName, TimeSpan duration);
+        void AddAudioEntity(string filename, string artist, string title, string albumName,string genre = "", int? year = null);
     }
 }
