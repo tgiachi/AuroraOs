@@ -3,6 +3,7 @@ using AuroraOs.Common.Core.Interfaces;
 using AuroraOs.Entities.Core.Repositories.Interfaces;
 using Id3;
 using NLog;
+using ParkSquare.Gracenote;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,12 +18,16 @@ namespace AuroraOs.Engine.Core.MediaParsers
     public class Mp3MediaParser : IMediaParser
     {
         private readonly IAudioEntityRepository _audioRepo;
+        private GracenoteClient _graceNoteClient;
+ 
 
         private ILogger _logger = LogManager.GetCurrentClassLogger();
 
         public Mp3MediaParser(IAudioEntityRepository audioRepo)
         {
             _audioRepo = audioRepo;
+            _graceNoteClient = new GracenoteClient("2053684250-A8BB6A7AB9D57251B49EE0E2A4A4743E");
+            
         }
 
 
@@ -42,9 +47,18 @@ namespace AuroraOs.Engine.Core.MediaParsers
 
                     var tags = tagFile.GetTag(TagTypes.Id3v2);
 
-                    _audioRepo.AddAudioEntity(filename, tags.FirstAlbumArtist, tags.Title, tags.Album, tags.FirstGenre, (int)tags.Year);
+                    var result =  _graceNoteClient.Search(new SearchCriteria()
+                    {
+                        Artist = tags.FirstAlbumArtist,
+                        TrackTitle = tags.Title,
 
-                    _logger.Info($"{tags.FirstAlbumArtist} - {tags.Title}");
+                    });
+
+                    var f = result.Albums.FirstOrDefault();
+
+                   _audioRepo.AddAudioEntity(filename, f.Artist, f.Title, tags.Album, f.Genre.FirstOrDefault(), f.Year);
+
+                    //_logger.Info($"{tags.FirstAlbumArtist} - {tags.Title}");
                 }
 
                 return Task.FromResult(true);
@@ -53,6 +67,7 @@ namespace AuroraOs.Engine.Core.MediaParsers
             catch (Exception ex)
             {
                 _logger.Error($"Error during parsing file {filename} => {ex.Message}");
+                _logger.Error(ex);
                 return Task.FromResult(false);
             }
         }
