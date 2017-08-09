@@ -1,7 +1,7 @@
 ﻿using AuroraOs.Common.Core.Attributes;
 using AuroraOs.Common.Core.Interfaces;
 using AuroraOs.Entities.Core.Repositories.Interfaces;
-using Id3;
+
 using NLog;
 using ParkSquare.Gracenote;
 using System;
