@@ -14,6 +14,7 @@ using System.Web.Http;
 
 namespace AuroraOs.Web.Api.Core.Controllers
 {
+    [RoutePrefix("api/Sensors")]
     public class SensorsController : ApiController
     {
         private readonly ISensorsService _sensorsService;
@@ -43,8 +44,9 @@ namespace AuroraOs.Web.Api.Core.Controllers
             return _sensorsService.GetSensorErrors();
         }
 
-        [Route("{name}/{state}")]
+       
         [HttpPost]
+        [Route("SetSwitch/{name}/{state}")]
         public string SetSwitch(string name, string state)
         {
             _eventQueueService.Publish(new ToggleSensorEvent()
@@ -55,7 +57,7 @@ namespace AuroraOs.Web.Api.Core.Controllers
             return "ok";
         }
 
-        [Route("{name}")]
+        [Route("ToggleSwitch/{name}")]
         [HttpPost]
         public string ToggleSwitch(string name)
         {

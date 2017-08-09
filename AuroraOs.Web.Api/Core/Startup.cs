@@ -1,6 +1,6 @@
 ﻿using AuroraOs.Common.Core.Manager;
 using AuroraOs.Web.Api.Core.Filters;
-
+using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -61,11 +61,16 @@ namespace AuroraOs.Web.Api.Core
             UseJsonOutput(config);
             UseSwagger(config);
 
+            appBuilder.UseCors(CorsOptions.AllowAll);
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.MapHttpAttributeRoutes();
+
 
             appBuilder.UseWebApi(config);
         }
