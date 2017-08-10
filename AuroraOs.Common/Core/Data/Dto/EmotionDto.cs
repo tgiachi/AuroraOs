@@ -8,11 +8,9 @@ namespace AuroraOs.Common.Core.Data.Dto
 
         public EmotionData Data {get;set;}
 
-
         public override string ToString()
         {
             return $"{DateTime} - {Data}";
-
         }
     }
 }

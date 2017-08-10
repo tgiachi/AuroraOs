@@ -33,6 +33,9 @@
     <Reference Include="Chroniton, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Chroniton.1.0.3.3\lib\net46\Chroniton.dll</HintPath>
     </Reference>
+    <Reference Include="Forecast.io.45, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Forecast.io.1.1.0\lib\net45\Forecast.io.45.dll</HintPath>
+    </Reference>
     <Reference Include="Foundatio, Version=5.1.1474.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foundatio.5.1.1474\lib\net46\Foundatio.dll</HintPath>
     </Reference>
@@ -113,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DataGenerators\SunsetGenerator.cs" />
+    <Compile Include="Core\DataGenerators\WeatherGenerator.cs" />
     <Compile Include="Core\Interfaces\IDataService.cs" />
     <Compile Include="Core\Interfaces\IEmotionService.cs" />
     <Compile Include="Core\Interfaces\IJsService.cs" />

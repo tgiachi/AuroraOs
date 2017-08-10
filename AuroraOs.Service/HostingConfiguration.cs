@@ -26,7 +26,15 @@ namespace AuroraOs.Service
 
         public bool Stop(HostControl hostControl)
         {
-            _webApplication.Dispose();
+            try
+            {
+                _webApplication.Dispose();
+            }
+            catch
+            {
+
+            }
+
             return true;
         }
     }

@@ -27,7 +27,7 @@ namespace AuroraOs.Engine.Core.Services
     [AuroraService]
     public class SensorsService : ISensorsService
     {
-        
+
         private readonly IMqttQueueClientService _mqttQueueClientService;
         private readonly IEventQueueService _eventQueueService;
 
@@ -187,9 +187,27 @@ namespace AuroraOs.Engine.Core.Services
             return true;
         }
 
+        public bool AddSensorValue(string sensorName, string type, object data)
+        {
+            if (data.GetType() is string)
+            {
+                _sensorValuesRepository.AddData(sensorName, type, (string)data);
+
+            }
+            else
+            {
+                type = data.GetType().FullName;
+                _sensorValuesRepository.AddData("weather_temperature", type, data.ToJson());
+            }
+
+            return true;
+            // _sensorsValuesRepository.AddData("weather_temperature", "°C", Convert.ToString(result.currently.temperature));
+
+        }
+
         public void Dispose()
         {
-          
+
         }
     }
 }

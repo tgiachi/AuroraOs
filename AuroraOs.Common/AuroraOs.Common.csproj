@@ -104,6 +104,7 @@
     <Compile Include="Core\Data\Dto\GraphDataDetail.cs" />
     <Compile Include="Core\Data\Dto\OwnTracksLocation.cs" />
     <Compile Include="Core\Data\Dto\SensorAvaiableDto.cs" />
+    <Compile Include="Core\Data\Dto\WeatherInfo.cs" />
     <Compile Include="Core\Data\EmotionData.cs" />
     <Compile Include="Core\Data\Errors\SensorError.cs" />
     <Compile Include="Core\Data\Events\MqttSendEvent.cs" />
