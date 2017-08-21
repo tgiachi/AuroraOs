@@ -94,6 +94,7 @@
     <Compile Include="Core\Attributes\MediaServiceTypeAttribute.cs" />
     <Compile Include="Core\Attributes\MongoDocumentAttribute.cs" />
     <Compile Include="Core\Attributes\MongoIndexAttribute.cs" />
+    <Compile Include="Core\Attributes\NotificatorAttribute.cs" />
     <Compile Include="Core\Attributes\SensorHandlerAttribute.cs" />
     <Compile Include="Core\CoordinatesDistanceExtensions.cs" />
     <Compile Include="Core\Data\Config\AuroraConfig.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Core\Data\IoT\Scene\SceneSensor.cs" />
     <Compile Include="Core\Data\IoT\Scene\SceneTrigger.cs" />
     <Compile Include="Core\Data\IoT\Scene\TriggerComparatorEnum.cs" />
+    <Compile Include="Core\Data\NotificationData.cs" />
     <Compile Include="Core\Data\SunsetData.cs" />
     <Compile Include="Core\Data\SunsetDataResults.cs" />
     <Compile Include="Core\Entities\BaseNoSqlEntity.cs" />
@@ -131,12 +133,14 @@
     <Compile Include="Core\Interfaces\IAuroraService.cs" />
     <Compile Include="Core\Interfaces\IDelayedService.cs" />
     <Compile Include="Core\Interfaces\IMediaParser.cs" />
+    <Compile Include="Core\Interfaces\INotificatorHandler.cs" />
     <Compile Include="Core\Interfaces\ISensorHandler.cs" />
     <Compile Include="Core\Manager\AuroraManager.cs" />
     <Compile Include="Core\Services\EventQueueService.cs" />
     <Compile Include="Core\Services\Interfaces\IDataGenerator.cs" />
     <Compile Include="Core\Services\Interfaces\IEventQueueService.cs" />
     <Compile Include="Core\Services\Interfaces\INoSqlService.cs" />
+    <Compile Include="Core\Services\Interfaces\INotificationService.cs" />
     <Compile Include="Core\Services\Interfaces\ITaskSchedulerService.cs" />
     <Compile Include="Core\Services\NoSqlService.cs" />
     <Compile Include="Core\Services\PriorityScheduler.cs" />

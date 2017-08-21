@@ -18,6 +18,11 @@ namespace AuroraOs.Entities.Core.Repositories
 
         private readonly INoSqlService _dbContext;
 
+        public AudioEntityRepository(INoSqlService noSqlService)
+        {
+            _dbContext = noSqlService;
+        }
+
 
         public void AddAudioEntity(string filename, string artist, string title, string albumName,  string genre = "", int? year = null)
         {

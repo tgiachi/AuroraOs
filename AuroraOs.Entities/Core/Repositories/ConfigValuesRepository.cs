@@ -73,7 +73,7 @@ namespace AuroraOs.Entities.Core.Repositories
                 obj.Value = serialz;
                 obj.Type = value.GetType().FullName;
 
-                _dbContext.Insert(obj);
+                _dbContext.Update(obj);
 
                 return true;
             }

@@ -9,7 +9,7 @@ namespace AuroraOs.Common.Core.Data.Events
 {
     public class SensorValueUpdateEvent
     {
-        public BaseIot Sensor { get; set; }
+        public string SensorName { get; set; }
 
         public string Value { get; set; }
 

@@ -65,9 +65,11 @@ namespace AuroraOs.Engine.Core.DataGenerators
                         var sunrise = DateTime.Parse(obj.Results.Sunrise);
                         var sunset = DateTime.Parse(obj.Results.Sunset);
 
-
                         _configValuesRepository.AddConfigValue("sunrise", sunrise);
                         _configValuesRepository.AddConfigValue("sunset", sunset);
+
+                        _sensorValuesRepository.AddData("sunrise", typeof(DateTime).FullName, sunset.ToShortTimeString());
+                        _sensorValuesRepository.AddData("sunset", typeof(DateTime).FullName, sunset.ToShortTimeString());
                     }
                 }
             }

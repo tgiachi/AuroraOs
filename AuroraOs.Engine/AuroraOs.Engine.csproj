@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushBulletSharp.3.0.1\lib\portable-windows8+net45\BouncyCastle.dll</HintPath>
+    </Reference>
     <Reference Include="Chroniton, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Chroniton.1.0.3.3\lib\net46\Chroniton.dll</HintPath>
     </Reference>
@@ -84,6 +87,9 @@
     <Reference Include="ParkSquare.Gracenote, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ParkSquare.Gracenote.1.6.3.0\lib\net40\ParkSquare.Gracenote.dll</HintPath>
     </Reference>
+    <Reference Include="PushbulletSharp, Version=3.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushBulletSharp.3.0.1\lib\portable-windows8+net45\PushbulletSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
@@ -117,6 +123,7 @@
   <ItemGroup>
     <Compile Include="Core\DataGenerators\SunsetGenerator.cs" />
     <Compile Include="Core\DataGenerators\WeatherGenerator.cs" />
+    <Compile Include="Core\Data\Sensors\WeatherSensor.cs" />
     <Compile Include="Core\Interfaces\IDataService.cs" />
     <Compile Include="Core\Interfaces\IEmotionService.cs" />
     <Compile Include="Core\Interfaces\IJsService.cs" />
@@ -124,8 +131,10 @@
     <Compile Include="Core\Interfaces\IMqttQueueClientService.cs" />
     <Compile Include="Core\Interfaces\ISceneService.cs" />
     <Compile Include="Core\Interfaces\ISensorsService.cs" />
+    <Compile Include="Core\Interfaces\ISonyBraviaService.cs" />
     <Compile Include="Core\MediaParsers\Mp3MediaParser.cs" />
     <Compile Include="Core\MediaParsers\TextMediaParser.cs" />
+    <Compile Include="Core\Notifiers\PushBulletNotifier.cs" />
     <Compile Include="Core\SensorsHandlers\MqttLocationSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSwitchHandler.cs" />
@@ -135,6 +144,7 @@
     <Compile Include="Core\Services\JsService.cs" />
     <Compile Include="Core\Services\MediaService.cs" />
     <Compile Include="Core\Services\MqttService.cs" />
+    <Compile Include="Core\Services\NotificationService.cs" />
     <Compile Include="Core\Services\SceneService.cs" />
     <Compile Include="Core\Services\SensorsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,5 +166,6 @@
   <ItemGroup>
     <Content Include="Readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,11 +17,11 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
     [SensorHandler(typeof(MqttSwitch))]
     public class MqttSwitchHandler : ISensorHandler
     {
-        private Dictionary<string, MqttStatusSwitch> _switches = new Dictionary<string, MqttStatusSwitch>();
+        private readonly Dictionary<string, MqttStatusSwitch> _switches = new Dictionary<string, MqttStatusSwitch>();
 
-        private IEventQueueService _eventQueueService;
-        private IMqttQueueClientService _mqttQueueClientService;
-        private ILogger _logger = LogManager.GetCurrentClassLogger();
+        private readonly IEventQueueService _eventQueueService;
+        private readonly IMqttQueueClientService _mqttQueueClientService;
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
         public MqttSwitchHandler(IEventQueueService eventQueueService, IMqttQueueClientService mqttQueueClientService)
         {

@@ -94,6 +94,7 @@ namespace AuroraOs.Engine.Core.Services
 
         public void StartGenerator(string name)
         {
+            _logger.Info($"Starting generator {name}");
             var dg = _generators.FirstOrDefault(s => s.GetType().Name == name);
 
             try

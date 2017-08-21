@@ -59,12 +59,7 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
 
                         _sensorValuesRepository.AddData(sens.Name, typeof(OwnTracksLocation).FullName, message);
 
-                        _eventQueueService.Publish(new SensorValueUpdateEvent()
-                        {
-                            Sensor = sens,
-                            UnitOfMeasurement = typeof(OwnTracksLocation).FullName,
-                            Value = message
-                        });
+           
 
                         if (_configValuesRepository.GetConfigByName("home") != null)
                         {
@@ -73,13 +68,7 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
 
                             var distance = home.DistanceTo(new Coordinates(gpsData.Latitude, gpsData.Longitude));
 
-                            _eventQueueService.Publish(new SensorValueUpdateEvent()
-                            {
-                                Sensor = sens,
-                                UnitOfMeasurement = "km",
-                                Value = distance.ToString()
-                            });
-
+                           
 
                             _sensorValuesRepository.AddData(sens.Name, "km", distance.ToString());
 
@@ -89,7 +78,7 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
                     }
                     catch (Exception ex)
                     {
-
+                        _logger.Error($"Error during add sensor {obj.GetType().Name} => {ex}");
                     }
 
                 }

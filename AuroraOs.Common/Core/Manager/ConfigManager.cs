@@ -97,7 +97,10 @@ namespace AuroraOs.Common.Core.Manager
             else
             {
                 if (!string.IsNullOrEmpty(defaultValue))
+                {
                     SetConfig<T>(key, defaultValue);
+                    return defaultValue;
+                }
             }
 
             return null;

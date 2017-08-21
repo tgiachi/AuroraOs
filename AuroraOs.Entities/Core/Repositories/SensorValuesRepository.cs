@@ -6,21 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using AuroraOs.Common.Core.Data.Dto;
 using AuroraOs.Common.Core.Attributes;
+using AuroraOs.Common.Core.Data.Events;
 using AuroraOs.Common.Core.Enums;
 using AuroraOs.Common.Core.Services.Interfaces;
 using AuroraOs.Entities.Core.Entities;
 using MoreLinq;
+using NLog;
 
 namespace AuroraOs.Entities.Core.Repositories
 {
     [AuroraService(AuroraServiceType.PerRequest)]
     public class SensorValuesRepository : ISensorValuesRepository
     {
-        private INoSqlService _dbContext; 
+        private readonly INoSqlService _dbContext;
+        private readonly IEventQueueService _eventQueueService;
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
-        public SensorValuesRepository(INoSqlService noSqlService)
+        public SensorValuesRepository(INoSqlService noSqlService, IEventQueueService eventQueueService)
         {
             _dbContext = noSqlService;
+            _eventQueueService = eventQueueService;
         }
 
         public void AddData(string sensorName, string unitOfMeasurement, string value)
@@ -32,6 +37,15 @@ namespace AuroraOs.Entities.Core.Repositories
                 UnitOfMeasurement = unitOfMeasurement,
                 Value = value
             });
+
+            _eventQueueService.Publish(new SensorValueUpdateEvent()
+            {
+                SensorName = sensorName,
+                UnitOfMeasurement = unitOfMeasurement,
+                Value = value
+            });
+
+            _logger.Info($"SensorName: {sensorName} => {value} {unitOfMeasurement}");
 
         }
 

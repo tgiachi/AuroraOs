@@ -52,13 +52,6 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
                 if (string.IsNullOrEmpty(s.ValueTemplate))
                 {
                     _sensorValuesRepository.AddData(s.Name, s.UnitOfMeasurement, message);
-
-                    _eventQueueService.Publish(new SensorValueUpdateEvent()
-                    {
-                        Sensor = s,
-                        UnitOfMeasurement = s.UnitOfMeasurement,
-                        Value = message
-                    });
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace AuroraOs.Engine.Core.DataGenerators
 {
@@ -24,12 +25,28 @@ namespace AuroraOs.Engine.Core.DataGenerators
         private IConfigValuesRepository _configValuesRepository;
         private ISensorValuesRepository _sensorsValuesRepository;
         private ISensorsService _sensorsService;
+        private ILogger _logger = LogManager.GetCurrentClassLogger();
 
         public WeatherGenerator(IConfigValuesRepository configValuesRepository, ISensorValuesRepository sensorsValuesRepository, ISensorsService sensorsService)
         {
             _configValuesRepository = configValuesRepository;
             _sensorsValuesRepository = sensorsValuesRepository;
             _sensorsService = sensorsService;
+
+            
+        }
+
+
+        private void CheckIfSensorsExists()
+        {
+            var sensor =  _sensorsService.GetSensors().FirstOrDefault(s => s.Name == "weather");
+
+            if (sensor == null)
+            {
+                
+                
+            }
+
         }
 
         public async void Execute()
@@ -51,7 +68,7 @@ namespace AuroraOs.Engine.Core.DataGenerators
             }
             catch (Exception ex)
             {
-
+                _logger.Error($"Error during execute Weather DataGenerator => {ex}");
             }
         }
     }

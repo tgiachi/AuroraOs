@@ -189,17 +189,19 @@ namespace AuroraOs.Engine.Core.Services
 
         public bool AddSensorValue(string sensorName, string type, object data)
         {
-            if (data.GetType() is string)
+            var s = data as string;
+            if (s != null)
             {
-                _sensorValuesRepository.AddData(sensorName, type, (string)data);
+                _sensorValuesRepository.AddData(sensorName, type, s);
 
             }
             else
             {
                 type = data.GetType().FullName;
-                _sensorValuesRepository.AddData("weather_temperature", type, data.ToJson());
+                _sensorValuesRepository.AddData(sensorName, type, data.ToJson());
             }
 
+          
             return true;
             // _sensorsValuesRepository.AddData("weather_temperature", "°C", Convert.ToString(result.currently.temperature));
 
