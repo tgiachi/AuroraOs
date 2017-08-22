@@ -9,11 +9,11 @@ namespace AuroraOs.Common.Core.Manager
 {
     public class ConfigManager
     {
-		private static readonly Lazy<ConfigManager> lazy = new Lazy<ConfigManager>(() => new ConfigManager());
-		public static ConfigManager Instance { get { return lazy.Value; } }
+        private static readonly Lazy<ConfigManager> lazy = new Lazy<ConfigManager>(() => new ConfigManager());
+        public static ConfigManager Instance { get { return lazy.Value; } }
 
         private AuroraConfig _config;
-		
+
         private string _homeDirectory = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}AuroraOs";
 
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
@@ -29,7 +29,7 @@ namespace AuroraOs.Common.Core.Manager
         {
             _logger.Info("Checking home directory");
 
-            var path =  Environment.GetEnvironmentVariable("AURORAOS_HOME");
+            var path = Environment.GetEnvironmentVariable("AURORAOS_HOME");
 
             if (!string.IsNullOrEmpty(path))
             {
@@ -45,7 +45,7 @@ namespace AuroraOs.Common.Core.Manager
 
 
 
-                
+
         }
 
         private void Load()
@@ -92,7 +92,7 @@ namespace AuroraOs.Common.Core.Manager
                     SetConfig<T>(key, defaultValue);
                     return defaultValue;
                 }
-                  
+
             }
             else
             {
@@ -110,8 +110,10 @@ namespace AuroraOs.Common.Core.Manager
         {
             if (!_config.Configs.ContainsKey(typeof(T).Name))
                 _config.Configs.Add(typeof(T).Name, new Dictionary<string, string>());
-
-            _config.Configs[typeof(T).Name].Add(key, value);
+            if (_config.Configs[typeof(T).Name].ContainsKey(key))
+                _config.Configs[typeof(T).Name][key] = value;
+            else
+                _config.Configs[typeof(T).Name].Add(key, value);
 
             Save();
         }
