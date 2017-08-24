@@ -14,8 +14,11 @@ namespace AuroraOs.Common.Core.Attributes
 
         public bool StartAtStartup { get; set; }
         
-        public AuroraServiceAttribute(AuroraServiceType serviceType = AuroraServiceType.Singleton, bool startAtStartup = false)
+        public string Category { get; set; }
+
+        public AuroraServiceAttribute(string category,AuroraServiceType serviceType = AuroraServiceType.Singleton, bool startAtStartup = false)
         {
+            Category = category;
             ServiceType = serviceType;
             StartAtStartup = startAtStartup;
         }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace AuroraOs.Engine.Core.Services
 {
 
-    [AuroraService]
+    [AuroraService("Health")]
     public class EmotionService : IEmotionService
     {
 

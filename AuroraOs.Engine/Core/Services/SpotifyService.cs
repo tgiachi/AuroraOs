@@ -14,7 +14,7 @@ using SpotifyAPI.Web.Enums;
 namespace AuroraOs.Engine.Core.Services
 {
 
-    [AuroraService]
+    [AuroraService("Audio")]
     public class SpotifyService : ISpotifyService
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
@@ -59,7 +59,6 @@ namespace AuroraOs.Engine.Core.Services
                 }
 
                 var userInfo = await _spotify.GetPrivateProfileAsync();
-
 
                 _logger.Info($"Spotify connected as {userInfo.DisplayName}");
             }

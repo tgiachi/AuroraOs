@@ -11,7 +11,7 @@ using AuroraOs.Common.Core.Attributes;
 
 namespace AuroraOs.Common.Core.Services
 {
-    [AuroraService]
+    [AuroraService("System")]
     public class EventQueueService : IEventQueueService
     {
 

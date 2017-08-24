@@ -10,32 +10,39 @@ using AuroraOs.Engine.Core.Interfaces;
 using Newtonsoft.Json;
 using NLog.Internal;
 using System.Net.Http;
+using System.Reactive.Linq;
+using Birdhouse;
 using NLog;
 
 
 namespace AuroraOs.Engine.Core.Services
 {
-    [AuroraService()]
+    [AuroraService("Climate")]
     public class NestService : INestService
     {
-        private readonly  ILogger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
         private string _clientId;
         private string _secretId;
+        private string _accessToken;
+        private string _code;
+        private NestClient _nestClient;
 
         public NestService()
         {
             Init();
         }
 
-        private void Init()
+        private async void Init()
         {
 
             _secretId = ConfigManager.Instance.GetConfigValue<NestService>("secret_id", "0430P42EXLbusyMyC1uGCyhMg");
             _clientId = ConfigManager.Instance.GetConfigValue<NestService>("client_id", "f3a5825e-1000-435c-bbf4-dcf81eecc082");
+            _accessToken = ConfigManager.Instance.GetConfigValue<NestService>("access_token", "");
+            _code = ConfigManager.Instance.GetConfigValue<NestService>("code", "");
 
 
-            if (string.IsNullOrEmpty(ConfigManager.Instance.GetConfigValue<NestService>("code", "")))
+            if (string.IsNullOrEmpty(_code))
             {
                 var authorizationUrl = $"https://home.nest.com/login/oauth2?client_id={_clientId}&state=STATE";
 
@@ -46,6 +53,37 @@ namespace AuroraOs.Engine.Core.Services
                 }
             }
 
+            if (!string.IsNullOrEmpty(_accessToken))
+            {
+                InitializeNestClient();
+            }
+
+        }
+
+        private async void InitializeNestClient()
+        {
+            try
+            {
+                _nestClient = new NestClient(_accessToken);
+                _logger.Info("Loading Thermostats");
+
+                var thermostats = await _nestClient.GetThermostatsAsync();
+
+                foreach (var thermostat in thermostats)
+                {
+                    _logger.Info($"Temperature of '{thermostat.Value.Name}' {thermostat.Value.TargetTemperatureCelsius} C");
+
+                    Observable.Interval(TimeSpan.FromMinutes(5)).Subscribe(async l =>
+                    {
+                        var thermo = await _nestClient.GetThermostatAsync(thermostat.Key);
+                        _logger.Debug($"Updating Thermostat '{thermo.Name}' temperature {thermo.TargetTemperatureCelsius} - Humidity {thermo.Humidity}");
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error during initializing NEST => {ex}");
+            }
         }
         public void Dispose()
         {

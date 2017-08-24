@@ -14,9 +14,11 @@ namespace AuroraOs.Common.Core.Manager
 {
     public class AuroraManager
     {
-        private ILogger _logger = LogManager.GetCurrentClassLogger();
-        private List<Type> _delayedServices = new List<Type>();
-        private List<Type> _singletonServices = new List<Type>();
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        private readonly List<Type> _delayedServices = new List<Type>();
+        private readonly List<Type> _singletonServices = new List<Type>();
+
+        private readonly Dictionary<string, List<Type>> _services = new Dictionary<string, List<Type>>();
 
         public IUnityContainer Container { get; set; }
 
@@ -108,6 +110,10 @@ namespace AuroraOs.Common.Core.Manager
                 if (serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                     _singletonServices.Add(type);
 
+                if (!_services.ContainsKey(serviceAttribute.Category))
+                    _services.Add(serviceAttribute.Category, new List<Type>());
+
+                _services[serviceAttribute.Category].Add(type);
 
                 if (serviceAttribute.StartAtStartup && serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                 {

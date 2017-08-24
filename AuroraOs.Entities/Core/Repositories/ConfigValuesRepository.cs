@@ -14,7 +14,7 @@ using AuroraOs.Common.Core.Utils;
 namespace AuroraOs.Entities.Core.Repositories
 {
 
-    [AuroraService(AuroraServiceType.PerRequest)]
+    [AuroraService("Repository",AuroraServiceType.PerRequest)]
     public class ConfigValuesRepository : IConfigValuesRepository
     {
 

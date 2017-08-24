@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace AuroraOs.Engine.Core.Services
 {
 
-    [AuroraService]
+    [AuroraService("System")]
     public class DataService : IDataService
     {
         private readonly IEventQueueService _eventQueueService;

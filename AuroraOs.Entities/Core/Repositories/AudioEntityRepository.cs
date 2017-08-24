@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace AuroraOs.Entities.Core.Repositories
 {
 
-    [AuroraService(AuroraServiceType.PerRequest)]
+    [AuroraService("Repository", AuroraServiceType.PerRequest)]
     public class AudioEntityRepository : IAudioEntityRepository
     {
 

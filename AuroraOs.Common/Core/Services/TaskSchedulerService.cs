@@ -10,7 +10,7 @@ using NLog;
 
 namespace AuroraOs.Common.Core.Services
 {
-    [AuroraService]
+    [AuroraService("System")]
     public class TaskSchedulerService : ITaskSchedulerService
     {
         private ILogger _logger = LogManager.GetCurrentClassLogger();

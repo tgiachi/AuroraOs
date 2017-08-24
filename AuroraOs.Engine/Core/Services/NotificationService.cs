@@ -15,7 +15,7 @@ using NLog;
 namespace AuroraOs.Engine.Core.Services
 {
 
-    [AuroraService]
+    [AuroraService("System")]
     public class NotificationService : INotificationService
     {
         private readonly IEventQueueService _eventQueueService;

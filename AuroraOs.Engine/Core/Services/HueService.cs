@@ -12,7 +12,7 @@ using Q42.HueApi.Interfaces;
 
 namespace AuroraOs.Engine.Core.Services
 {
-    [AuroraService]
+    [AuroraService("Lighting")]
     public class HueService : IHueService
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
@@ -37,14 +37,16 @@ namespace AuroraOs.Engine.Core.Services
                 //See the included BridgeDiscoveryTests and the specific .NET and .WinRT projects
                 var bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(30));
 
-                hueClient = new LocalHueClient(bridgeIPs.FirstOrDefault().IpAddress);
-                _logger.Info($"Found bridgeId: {bridgeIPs.FirstOrDefault().BridgeId}");
+                if (bridgeIPs.Any())
+                {
+                    hueClient = new LocalHueClient(bridgeIPs.FirstOrDefault().IpAddress);
+                    _logger.Info($"Found bridgeId: {bridgeIPs.FirstOrDefault().BridgeId}");
 
-                apiKey = await hueClient.RegisterAsync("AuroraOS", "AuroraOS");
+                    apiKey = await hueClient.RegisterAsync("AuroraOS", "AuroraOS");
 
-                ConfigManager.Instance.SetConfig<HueService>("apiKey", apiKey);
-                ConfigManager.Instance.SetConfig<HueService>("bridgeIpAddress", bridgeIPs.FirstOrDefault().IpAddress);
-
+                    ConfigManager.Instance.SetConfig<HueService>("apiKey", apiKey);
+                    ConfigManager.Instance.SetConfig<HueService>("bridgeIpAddress", bridgeIPs.FirstOrDefault().IpAddress);
+                }
             }
             else
             {
@@ -58,7 +60,7 @@ namespace AuroraOs.Engine.Core.Services
             //    await hueClient.SendCommandAsync(new LightCommand() {BrightnessIncrement = 40},
             //        new List<string>() {light.Id});
             //}
-          
+
 
 
         }

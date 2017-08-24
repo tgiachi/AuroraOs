@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace AuroraOs.Engine.Core.Services
 {
 
-    [AuroraService]
+    [AuroraService("System")]
     public class SceneService : ISceneService
     {
         private readonly IEventQueueService _eventQueueService;

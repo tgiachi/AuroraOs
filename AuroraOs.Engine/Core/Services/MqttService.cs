@@ -15,7 +15,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace AuroraOs.Engine.Core.Services
 {
-    [AuroraService]
+    [AuroraService("System")]
     public class MqttQueueClientService : IMqttQueueClientService
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();

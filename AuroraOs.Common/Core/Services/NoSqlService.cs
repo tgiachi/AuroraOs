@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Common.Core.Services
 {
-    [AuroraService]
+    [AuroraService("System")]
     public class NoSqlService : INoSqlService
     {
 

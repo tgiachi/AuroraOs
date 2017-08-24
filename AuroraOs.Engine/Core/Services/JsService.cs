@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Engine.Core.Services
 {
-    [AuroraService]
+    [AuroraService("System")]
     public class JsService : IJsService
     {
         private Jint.Engine _engine;
@@ -22,7 +22,6 @@ namespace AuroraOs.Engine.Core.Services
         public JsService()
         {
             _engine = new Jint.Engine(cfg => cfg.AllowClr());
-
         }
 
         public void RegisterFunction(string name, object del)

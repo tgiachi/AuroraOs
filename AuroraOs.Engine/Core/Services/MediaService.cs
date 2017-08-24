@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Engine.Core.Services
 {
-    [AuroraService]
+    [AuroraService("Audio")]
     public class MediaService : IMediaService
     {
         private ILogger _logger = LogManager.GetCurrentClassLogger();
