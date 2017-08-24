@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApiAiSDK, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ApiAiSDK.1.6.5\lib\net35\ApiAiSDK.dll</HintPath>
+    </Reference>
     <Reference Include="Birdhouse, Version=1.0.0.234, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Birdhouse.1.0.0\lib\Birdhouse.dll</HintPath>
     </Reference>
@@ -214,6 +217,7 @@
     <Compile Include="Core\DataGenerators\SunsetGenerator.cs" />
     <Compile Include="Core\DataGenerators\WeatherGenerator.cs" />
     <Compile Include="Core\Data\Sensors\WeatherSensor.cs" />
+    <Compile Include="Core\Interfaces\IAiService.cs" />
     <Compile Include="Core\Interfaces\IDataService.cs" />
     <Compile Include="Core\Interfaces\IEmotionService.cs" />
     <Compile Include="Core\Interfaces\IHueService.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="Core\SensorsHandlers\MqttSensorHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttSwitchHandler.cs" />
     <Compile Include="Core\SensorsHandlers\MqttTimedSwitchHandler.cs" />
+    <Compile Include="Core\Services\AiService.cs" />
     <Compile Include="Core\Services\DataService.cs" />
     <Compile Include="Core\Services\EmotionService.cs" />
     <Compile Include="Core\Services\HueService.cs" />

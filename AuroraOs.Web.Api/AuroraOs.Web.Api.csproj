@@ -98,6 +98,7 @@
     <Compile Include="Core\Controllers\OAuthController.cs" />
     <Compile Include="Core\Controllers\ScenesController.cs" />
     <Compile Include="Core\Controllers\SensorsController.cs" />
+    <Compile Include="Core\Controllers\StreamController.cs" />
     <Compile Include="Core\Extensions\HttpRequestMessageExtensions.cs" />
     <Compile Include="Core\Filters\ActionExecutedContext.cs" />
     <Compile Include="Core\Filters\LoggingFilterAttribute.cs" />
