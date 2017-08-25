@@ -43,6 +43,10 @@ namespace AuroraOs.Engine.Core.Services
             _apiSecret = ConfigManager.Instance.GetConfigValue<WithingService>("apiSecret",
                 "0b6bf1d008bfcc0bb410c72672b050001574bc1b01d26c2668b753313659c");
 
+            _oauthToken = ConfigManager.Instance.GetConfigValue<WithingService>("oauthToken", "");
+
+            
+
             _credentials = new WithingsCredentials()
             {
                 ConsumerSecret = _apiSecret,
@@ -52,19 +56,26 @@ namespace AuroraOs.Engine.Core.Services
 
             var authenticator = new Authenticator(_credentials);
 
-            var token = await authenticator.GetRequestToken();
-            
-            ConfigManager.Instance.SetConfig<WithingService>("token_key", token.Key);
-            ConfigManager.Instance.SetConfig<WithingService>("token_secret", token.Secret);
-
-
-            using (var process = Process.Start(authenticator.UserRequestUrl(token)))
+            if (string.IsNullOrEmpty(_oauthToken))
             {
-                _logger.Info("Awaiting response, please accept on the Works with Nest page to continue");
+                var token = await authenticator.GetRequestToken();
+
+                ConfigManager.Instance.SetConfig<WithingService>("token_key", token.Key);
+                ConfigManager.Instance.SetConfig<WithingService>("token_secret", token.Secret);
+
+
+                using (var process = Process.Start(authenticator.UserRequestUrl(token)))
+                {
+                    _logger.Info("Awaiting response, please accept on the Works with Nest page to continue");
+
+                }
+
+               
 
             }
 
             _client = new WithingsClient(_credentials);
+
 
         }
 
@@ -82,7 +93,7 @@ namespace AuroraOs.Engine.Core.Services
             ConfigManager.Instance.SetConfig<WithingService>("oauthToken", oauthToken);
             ConfigManager.Instance.SetConfig<WithingService>("Oauth_verifier", Oauth_verifier);
 
-            var ok = await _client.GetBodyMeasures(_userId, DateTime.MinValue, _credentials.ConsumerKey, _credentials.ConsumerSecret);
+            var ok = await _client.GetBodyMeasures(_userId, DateTime.MinValue, oauthToken, _apiSecret);
         }
     }
 }

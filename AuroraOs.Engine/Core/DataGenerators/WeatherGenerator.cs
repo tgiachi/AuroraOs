@@ -23,14 +23,14 @@ namespace AuroraOs.Engine.Core.DataGenerators
     public class WeatherGenerator : IDataGenerator
     {
         private IConfigValuesRepository _configValuesRepository;
-        private ISensorValuesRepository _sensorsValuesRepository;
+        
         private ISensorsService _sensorsService;
         private ILogger _logger = LogManager.GetCurrentClassLogger();
 
-        public WeatherGenerator(IConfigValuesRepository configValuesRepository, ISensorValuesRepository sensorsValuesRepository, ISensorsService sensorsService)
+        public WeatherGenerator(IConfigValuesRepository configValuesRepository,  ISensorsService sensorsService)
         {
             _configValuesRepository = configValuesRepository;
-            _sensorsValuesRepository = sensorsValuesRepository;
+
             _sensorsService = sensorsService;
 
             

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AuroraOs.Engine.Core.Interfaces;
+using AuroraOs.Engine.Core.Services;
 
 namespace AuroraOs.Engine.Core.DataGenerators
 {
@@ -21,13 +23,13 @@ namespace AuroraOs.Engine.Core.DataGenerators
 
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
-        private readonly ISensorValuesRepository _sensorValuesRepository;
+        private readonly ISensorsService _sensorsService;
 
         private readonly IConfigValuesRepository _configValuesRepository;
 
-        public SunsetGenerator(ISensorValuesRepository sensorValuesRepository, IConfigValuesRepository configValuesRepository)
+        public SunsetGenerator(ISensorsService sensorsService, IConfigValuesRepository configValuesRepository)
         {
-            _sensorValuesRepository = sensorValuesRepository;
+            _sensorsService = sensorsService;
             _configValuesRepository = configValuesRepository;
             _httpClient = new HttpClient();
 
@@ -68,8 +70,9 @@ namespace AuroraOs.Engine.Core.DataGenerators
                         _configValuesRepository.AddConfigValue("sunrise", sunrise);
                         _configValuesRepository.AddConfigValue("sunset", sunset);
 
-                        _sensorValuesRepository.AddData("sunrise", typeof(DateTime).FullName, sunset.ToShortTimeString());
-                        _sensorValuesRepository.AddData("sunset", typeof(DateTime).FullName, sunset.ToShortTimeString());
+                        _sensorsService.AddSensorValue("sunrise",  typeof(DateTime).FullName, sunset);
+                        _sensorsService.AddSensorValue("sunset", typeof(DateTime).FullName, sunset);
+
                     }
                 }
             }

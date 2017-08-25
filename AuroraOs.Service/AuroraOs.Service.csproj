@@ -101,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aurora.TTS.Module\Aurora.TTS.Module.csproj">
+      <Project>{f4ee053c-a7fb-4023-8032-302c9f40f638}</Project>
+      <Name>Aurora.TTS.Module</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AuroraOs.Common\AuroraOs.Common.csproj">
       <Project>{0ef89b58-b02b-49c0-b8b1-0c57ac023cf6}</Project>
       <Name>AuroraOs.Common</Name>

@@ -17,11 +17,11 @@ namespace AuroraOs.Engine.Core.Services
     {
 
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
-        private readonly ISensorValuesRepository _sensorValuesRepository;
+        private readonly ISensorsService _sensorsService;
 
-        public EmotionService(ISensorValuesRepository sensorValuesRepository)
+        public EmotionService(SensorsService sensorsService)
         {
-            _sensorValuesRepository = sensorValuesRepository;
+            _sensorsService = sensorsService;
         }
 
         public Task Init()
@@ -36,7 +36,7 @@ namespace AuroraOs.Engine.Core.Services
 
         public List<EmotionDto> GetEmotions(DateTime? fromDate = default(DateTime?), DateTime? toDate = default(DateTime?))
         {
-            var list = _sensorValuesRepository.GetSensorData("emotion", null, null);
+            var list = _sensorsService.GetDataSensor("emotion", DateTime.MinValue, DateTime.MaxValue);
             var emotionList = new List<EmotionDto>();
 
             list.Values.ForEach(x =>
@@ -56,7 +56,7 @@ namespace AuroraOs.Engine.Core.Services
 
         public void SetEmotion(EmotionData emotion)
         {
-            _sensorValuesRepository.AddData("emotion", "emotionData", emotion.ToString());
+            _sensorsService.AddSensorValue("emotion", typeof(EmotionData).FullName, emotion.ToString());
         }
     }
 }

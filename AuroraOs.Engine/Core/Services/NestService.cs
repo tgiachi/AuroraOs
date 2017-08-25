@@ -11,7 +11,9 @@ using Newtonsoft.Json;
 using NLog.Internal;
 using System.Net.Http;
 using System.Reactive.Linq;
+using AuroraOs.Entities.Core.Repositories.Interfaces;
 using Birdhouse;
+using Microsoft.Practices.Unity;
 using NLog;
 
 
@@ -20,6 +22,13 @@ namespace AuroraOs.Engine.Core.Services
     [AuroraService("Climate")]
     public class NestService : INestService
     {
+
+        [Dependency]
+        public ISensorsService SensorService { get; set; }
+
+        [Dependency]
+        public IMqttQueueClientService MqttQueueClientService { get; set; }
+
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
         private string _clientId;
@@ -29,6 +38,7 @@ namespace AuroraOs.Engine.Core.Services
         private NestClient _nestClient;
 
      
+        
 
         public Task  Init()
         {
@@ -69,12 +79,15 @@ namespace AuroraOs.Engine.Core.Services
 
                 foreach (var thermostat in thermostats)
                 {
-                    _logger.Info($"Temperature of '{thermostat.Value.Name}' {thermostat.Value.TargetTemperatureCelsius} C");
+                    _logger.Info($"Temperature of '{thermostat.Value.Name}' {thermostat.Value.AmbientTemperatureCelsius} C");
+                    UpdateValues(thermostat.Value.AmbientTemperatureCelsius, thermostat.Value.Humidity);
 
                     Observable.Interval(TimeSpan.FromMinutes(5)).Subscribe(async l =>
                     {
                         var thermo = await _nestClient.GetThermostatAsync(thermostat.Key);
-                        _logger.Debug($"Updating Thermostat '{thermo.Name}' temperature {thermo.TargetTemperatureCelsius} - Humidity {thermo.Humidity}");
+                        _logger.Debug($"Updating Thermostat '{thermo.Name}' temperature {thermo.AmbientTemperatureCelsius} - Humidity {thermo.Humidity}");
+
+                        UpdateValues(thermo.AmbientTemperatureCelsius, thermo.Humidity);
                     });
                 }
             }
@@ -85,6 +98,13 @@ namespace AuroraOs.Engine.Core.Services
         }
         public void Dispose()
         {
+
+        }
+
+        private void UpdateValues(float temperature, float humidity)
+        {
+            SensorService.AddSensorValue("home_temperature", "C", temperature);
+            SensorService.AddSensorValue("home_humidity", "%", humidity);
 
         }
 

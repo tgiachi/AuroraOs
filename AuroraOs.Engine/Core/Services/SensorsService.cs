@@ -200,15 +200,16 @@ namespace AuroraOs.Engine.Core.Services
             if (s != null)
             {
                 _sensorValuesRepository.AddData(sensorName, type, s);
-
             }
             else
             {
                 type = data.GetType().FullName;
                 _sensorValuesRepository.AddData(sensorName, type, data.ToJson());
+
             }
 
-          
+            _mqttQueueClientService.PublishQueue(sensorName.Replace("_", "/"), data);
+
             return true;
             // _sensorsValuesRepository.AddData("weather_temperature", "°C", Convert.ToString(result.currently.temperature));
 

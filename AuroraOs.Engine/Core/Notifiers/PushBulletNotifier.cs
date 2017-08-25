@@ -48,30 +48,30 @@ namespace AuroraOs.Engine.Core.Notifiers
 
         public Task<bool> Notificate(NotificationData data)
         {
-            _pushbulletClient.CurrentUsersDevices().Devices.ForEach(s =>
-            {
-                var request = new PushNoteRequest()
-                {
-                    ClientIden = _pushbulletClient.CurrentUsersInformation().Iden,
-                    DeviceIden = s.Iden,
-                    SourceDeviceIden = _pushbulletClient.CurrentUsersInformation().Iden,
-                    Title = "AuroraOs Notification",
-                    Body = data.Message,
-                    ChannelTag = "Notifications",
-                    Email = "squid@stormwind.it"
-                };
+            //_pushbulletClient.CurrentUsersDevices().Devices.ForEach(s =>
+            //{
+            //    var request = new PushNoteRequest()
+            //    {
+            //        ClientIden = _pushbulletClient.CurrentUsersInformation().Iden,
+            //        DeviceIden = s.Iden,
+            //        SourceDeviceIden = _pushbulletClient.CurrentUsersInformation().Iden,
+            //        Title = "AuroraOs Notification",
+            //        Body = data.Message,
+            //        ChannelTag = "Notifications",
+            //        Email = "squid@stormwind.it"
+            //    };
 
-                try
-                {
-                    _pushbulletClient.PushNote(request);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error($"Can't notifiy => {ex}");
-                }
+            //    try
+            //    {
+            //        _pushbulletClient.PushNote(request);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.Error($"Can't notifiy => {ex}");
+            //    }
                
 
-            });
+            //});
 
             return Task.FromResult(true);
         }
