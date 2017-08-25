@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Entities.Core.Repositories.Interfaces
 {
-    public interface IConfigValuesRepository : IAuroraService
+    public interface IConfigValuesRepository 
     {
         bool AddConfigValue(string name, object value);
 

@@ -24,6 +24,11 @@ namespace AuroraOs.Engine.Core.Services
             _sensorValuesRepository = sensorValuesRepository;
         }
 
+        public Task Init()
+        {
+            return Task.CompletedTask;
+        }
+
         public void Dispose()
         {
 

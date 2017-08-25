@@ -48,7 +48,7 @@ namespace AuroraOs.Engine.Core.Services
             });
         }
 
-        private void Init()
+        public Task Init()
         {
             var host = ConfigManager.Instance.GetConfigValue<MqttQueueClientService>("mqtt_host", "test.mosquitto.org");
             var port = int.Parse(ConfigManager.Instance.GetConfigValue<MqttQueueClientService>("mqtt_port", "1883"));
@@ -71,6 +71,9 @@ namespace AuroraOs.Engine.Core.Services
                 _logger.Error($"Error during connect to {host}:{port}");
                 _logger.Error(ex);
             }
+
+            return Task.CompletedTask;
+            
 
         }
 

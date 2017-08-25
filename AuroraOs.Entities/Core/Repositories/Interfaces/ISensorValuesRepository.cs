@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Entities.Core.Repositories.Interfaces
 {
-    public interface ISensorValuesRepository : IAuroraService
+    public interface ISensorValuesRepository : IDisposable
     {
         void AddData(string sensorName, string unitOfMeasurement, string value);
 

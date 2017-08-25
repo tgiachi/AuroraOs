@@ -24,6 +24,11 @@ namespace AuroraOs.Engine.Core.Services
             _engine = new Jint.Engine(cfg => cfg.AllowClr());
         }
 
+        public Task Init()
+        {
+            return Task.CompletedTask;
+        }
+
         public void RegisterFunction(string name, object del)
         {
             _engine.SetValue(name, del);

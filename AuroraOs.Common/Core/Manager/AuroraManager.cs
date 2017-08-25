@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.ObjectBuilder2;
 
 namespace AuroraOs.Common.Core.Manager
 {
@@ -18,14 +19,18 @@ namespace AuroraOs.Common.Core.Manager
         private readonly List<Type> _delayedServices = new List<Type>();
         private readonly List<Type> _singletonServices = new List<Type>();
 
-        private readonly Dictionary<string, List<Type>> _services = new Dictionary<string, List<Type>>();
+        public Dictionary<string, List<Type>> Services { get; set; }
 
         public IUnityContainer Container { get; set; }
 
         public AuroraManager()
         {
+            Services = new Dictionary<string, List<Type>>();
+
             Init();
         }
+
+
 
         private void Init()
         {
@@ -34,13 +39,37 @@ namespace AuroraOs.Common.Core.Manager
 
             Container = new UnityContainer();
             Container.RegisterInstance<IUnityContainer>(Container);
+            Container.RegisterInstance(this);
 
             _logger.Info("Scanning assemblies for services");
 
+            ScanRepositories();
 
             ScanServices();
 
             StartDelayedServices();
+        }
+
+        private void ScanRepositories()
+        {
+            var repos = AssemblyUtils.ScanAllAssembliesFromAttribute(typeof(AuroraReporitoryAttribute));
+
+
+            foreach (var type in repos)
+            {
+                if (type.GetInterfaces().Any())
+                {
+                    var inter = type.GetInterfaces().FirstOrDefault(s => s.Name.Contains(type.Name));
+
+                    Container.RegisterType(inter, type, new PerResolveLifetimeManager());
+                }
+                else
+                {
+                    Container.RegisterType(type, new PerResolveLifetimeManager());
+                }
+
+                _logger.Info($"Registered repository {type.Name}");
+            }
         }
 
         private void ScanServices()
@@ -56,18 +85,39 @@ namespace AuroraOs.Common.Core.Manager
 
         private void StartDelayedServices()
         {
-            _singletonServices.ForEach(s => Container.Resolve(s));
+            _singletonServices.ForEach(s =>
+            {
 
-            _delayedServices.ForEach(async service =>
+                try
+                {
+                    Task.Run(() => Container.Resolve(s));
+                  ;
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"Error during resolve service {s.Name} => {ex}");
+                }
+
+            });
+
+            _singletonServices.ForEach(async service =>
             {
                 try
                 {
+                    var ausService = Container.Resolve(service) as IAuroraService;
+
+                    if (ausService != null)
+                        Task.Run(() => ausService?.Init());
+
                     var srv = Container.Resolve(service) as IDelayedService;
 
                     if (srv != null)
                         await srv?.Start();
-                    else
-                        _logger.Warn($"Service {service.Name} not implement IDelayedService interface");
+                    //else
+                    //    _logger.Warn($"Service {service.Name} not implement IDelayedService interface");
+
+
+
                 }
                 catch (Exception ex)
                 {
@@ -75,9 +125,10 @@ namespace AuroraOs.Common.Core.Manager
                     _logger.Error(ex);
                 }
 
-
             });
         }
+
+       
 
         private void InitService(Type type)
         {
@@ -96,7 +147,7 @@ namespace AuroraOs.Common.Core.Manager
                 _logger.Debug($"Registering {type.Name} as {serviceAttribute.ServiceType}");
 
 
-                if (type.GetInterfaces().Count() > 0)
+                if (type.GetInterfaces().Any())
                 {
                     var inter = type.GetInterfaces().FirstOrDefault(s => s.Name.Contains(type.Name));
 
@@ -110,10 +161,10 @@ namespace AuroraOs.Common.Core.Manager
                 if (serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                     _singletonServices.Add(type);
 
-                if (!_services.ContainsKey(serviceAttribute.Category))
-                    _services.Add(serviceAttribute.Category, new List<Type>());
+                if (!Services.ContainsKey(serviceAttribute.Category))
+                    Services.Add(serviceAttribute.Category, new List<Type>());
 
-                _services[serviceAttribute.Category].Add(type);
+                Services[serviceAttribute.Category].Add(type);
 
                 if (serviceAttribute.StartAtStartup && serviceAttribute.ServiceType == Enums.AuroraServiceType.Singleton)
                 {

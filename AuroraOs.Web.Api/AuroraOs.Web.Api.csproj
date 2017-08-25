@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Controllers\AssistantController.cs" />
     <Compile Include="Core\Controllers\ConfigController.cs" />
     <Compile Include="Core\Controllers\DataGeneratorsController.cs" />
     <Compile Include="Core\Controllers\DiagnosticController.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Core\Controllers\OAuthController.cs" />
     <Compile Include="Core\Controllers\ScenesController.cs" />
     <Compile Include="Core\Controllers\SensorsController.cs" />
+    <Compile Include="Core\Controllers\ServicesController.cs" />
     <Compile Include="Core\Controllers\StreamController.cs" />
     <Compile Include="Core\Extensions\HttpRequestMessageExtensions.cs" />
     <Compile Include="Core\Filters\ActionExecutedContext.cs" />

@@ -29,7 +29,7 @@ namespace AuroraOs.Engine.Core.Services
             _eventQueueService = eventQueueService;
             _unityContainer = unityContainer;
 
-            ScanNotificationHandlers();
+         
 
             _eventQueueService.Subscribe(new Action<SensorValueUpdateEvent>(_event =>
             {
@@ -43,7 +43,7 @@ namespace AuroraOs.Engine.Core.Services
             }));
         }
 
-        private async void ScanNotificationHandlers()
+        public async Task Init()
         {
             var types = AssemblyUtils.ScanAllAssembliesFromAttribute(typeof(NotificatorAttribute));
             _logger.Debug($"Found {types.Count} notifier");

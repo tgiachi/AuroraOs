@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuroraOs.Common.Core.Interfaces
+namespace AuroraOs.Common.Core.Data.Events
 {
-    public interface IAuroraService : IDisposable
+    public class AiRequestSpeechEvent 
     {
-
-        Task Init();
+        public string Text { get; set; }
     }
 }

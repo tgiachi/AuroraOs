@@ -28,12 +28,9 @@ namespace AuroraOs.Engine.Core.Services
         private string _code;
         private NestClient _nestClient;
 
-        public NestService()
-        {
-            Init();
-        }
+     
 
-        private async void Init()
+        public Task  Init()
         {
 
             _secretId = ConfigManager.Instance.GetConfigValue<NestService>("secret_id", "0430P42EXLbusyMyC1uGCyhMg");
@@ -58,6 +55,7 @@ namespace AuroraOs.Engine.Core.Services
                 InitializeNestClient();
             }
 
+            return Task.CompletedTask;
         }
 
         private async void InitializeNestClient()

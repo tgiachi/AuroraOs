@@ -42,12 +42,18 @@ namespace AuroraOs.Engine.Core.Services
 
             _configValuesRepository.AddConfigValue("home", new Coordinates(43.7496897, 11.3232478));
 
+           
+
+        }
+
+        public Task Init()
+        {
             TestScenes();
 
             InitJsFunctions();
             LoadScenes();
 
-
+            return Task.CompletedTask;
         }
 
 

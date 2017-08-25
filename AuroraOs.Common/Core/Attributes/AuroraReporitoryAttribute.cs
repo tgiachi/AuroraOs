@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuroraOs.Common.Core.Interfaces
+namespace AuroraOs.Common.Core.Attributes
 {
-    public interface IAuroraService : IDisposable
+    public class AuroraReporitoryAttribute : Attribute
     {
-
-        Task Init();
     }
 }

@@ -20,11 +20,11 @@ namespace AuroraOs.Engine.Core.Services
 
         public HueService()
         {
-            Init();
+           
 
         }
 
-        private async void Init()
+        public async Task Init()
         {
             var apiKey = ConfigManager.Instance.GetConfigValue<HueService>("apiKey", "");
             var bridgeAddress = ConfigManager.Instance.GetConfigValue<HueService>("bridgeIpAddress", "");

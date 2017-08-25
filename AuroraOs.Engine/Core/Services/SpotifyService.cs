@@ -24,11 +24,10 @@ namespace AuroraOs.Engine.Core.Services
 
         public SpotifyService()
         {
-            InitSpotify();
 
         }
 
-        private async void InitSpotify()
+        public async Task Init()
         {
             try
             {

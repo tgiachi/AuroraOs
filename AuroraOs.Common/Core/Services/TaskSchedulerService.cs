@@ -21,6 +21,11 @@ namespace AuroraOs.Common.Core.Services
             _logger.Info($"Task scheduler max councurrent tasks: {Math.Max(1, Environment.ProcessorCount)}");
         }
 
+        public Task Init()
+        {
+            return Task.CompletedTask;
+        }
+
         public void Dispose()
         {
             

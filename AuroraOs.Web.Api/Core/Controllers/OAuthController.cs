@@ -14,9 +14,12 @@ namespace AuroraOs.Web.Api.Core.Controllers
     {
 
         private readonly INestService _nestService;
-        public OAuthController(INestService nestService)
+        private readonly IWithingService _withingService;
+
+        public OAuthController(INestService nestService, IWithingService withingService)
         {
             _nestService = nestService;
+            _withingService = withingService;
         }
 
         [HttpGet]
@@ -25,6 +28,13 @@ namespace AuroraOs.Web.Api.Core.Controllers
             _nestService.ReceiveCode(code);
 
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage withings(string userId, string oauth_Token, string Oauth_verifier)
+        {
+            _withingService.InitializeAuth(userId, oauth_Token, Oauth_verifier);
+            return Request.CreateResponse(HttpStatusCode.OK, "OK");
         }
     }
 }

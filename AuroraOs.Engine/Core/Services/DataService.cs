@@ -36,7 +36,15 @@ namespace AuroraOs.Engine.Core.Services
             _singularity = Singularity.Instance;
             _singularity.Start();
 
+            
+        }
+
+        public Task Init()
+        {
             AddDataGenerator();
+
+            return Task.CompletedTask;
+            
         }
 
         public void AddDataGenerator()

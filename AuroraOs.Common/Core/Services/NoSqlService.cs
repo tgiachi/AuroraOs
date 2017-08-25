@@ -29,9 +29,11 @@ namespace AuroraOs.Common.Core.Services
         {
             CheckConfig();
 
-            Init();
 
+            StartDb();
         }
+
+        
 
         private void CheckConfig()
         {
@@ -52,7 +54,7 @@ namespace AuroraOs.Common.Core.Services
             }
         }
 
-        private void Init()
+        private Task StartDb()
         {
             try
             {
@@ -61,12 +63,21 @@ namespace AuroraOs.Common.Core.Services
                 _database = _mongoClient.GetDatabase(_databaseName);
                 _logger.Info($"Connected to {_connectionString} - Database {_databaseName}!");
 
+                return Task.CompletedTask;
+
             }
             catch (Exception ex)
             {
                 _logger.Error($"Error during connecting to {_connectionString}!");
                 _logger.Error(ex);
             }
+
+            return Task.CompletedTask;
+        }
+
+        public Task Init()
+        {
+          return Task.CompletedTask;
         }
 
 

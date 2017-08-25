@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuroraOs.Entities.Core.Repositories.Interfaces
 {
-    public interface IAudioEntityRepository
+    public interface IAudioEntityRepository : IDisposable
     {
         void AddAudioEntity(string filename, string artist, string title, string albumName,string genre = "", int? year = null);
     }

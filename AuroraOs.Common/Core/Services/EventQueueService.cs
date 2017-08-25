@@ -27,6 +27,11 @@ namespace AuroraOs.Common.Core.Services
            
         }
 
+        public Task Init()
+        {
+            return Task.CompletedTask;
+        }
+
 
         public bool Subscribe<T>(Action<T> action) where T : class
         {

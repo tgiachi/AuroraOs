@@ -29,10 +29,9 @@ namespace AuroraOs.Engine.Core.Services
             _container = container;
             _taskScheduler = taskScheduler;
 
-            Init();
         }
 
-        private void Init()
+        public Task Init()
         {
             var types = AssemblyUtils.ScanAllAssembliesFromAttribute(typeof(MediaServiceTypeAttribute));
 
@@ -60,6 +59,8 @@ namespace AuroraOs.Engine.Core.Services
                     _logger.Error(ex);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         public void Dispose()

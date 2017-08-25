@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace AuroraOs.Entities.Core.Repositories
 {
 
-    [AuroraService("Repository", AuroraServiceType.PerRequest)]
+    [AuroraReporitory]
     public class AudioEntityRepository : IAudioEntityRepository
     {
 
@@ -42,6 +42,11 @@ namespace AuroraOs.Entities.Core.Repositories
                 ent.Year = year.Value;
 
             _dbContext.Insert(ent);
+        }
+
+        public void Dispose()
+        {
+            _dbContext?.Dispose();
         }
     }
 }

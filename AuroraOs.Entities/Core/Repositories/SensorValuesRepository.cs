@@ -15,7 +15,8 @@ using NLog;
 
 namespace AuroraOs.Entities.Core.Repositories
 {
-    [AuroraService("Repository", AuroraServiceType.PerRequest)]
+    [AuroraReporitory]
+
     public class SensorValuesRepository : ISensorValuesRepository
     {
         private readonly INoSqlService _dbContext;

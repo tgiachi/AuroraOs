@@ -23,10 +23,10 @@ namespace AuroraOs.Engine.Core.Services
 
         public LastFmService()
         {
-            Init();
+          
         }
 
-        private void Init()
+       public Task Init()
         {
             _apiKey = ConfigManager.Instance.GetConfigValue<LastFmService>("apiKey", "");
             _apiSecret = ConfigManager.Instance.GetConfigValue<LastFmService>("_apiSecret", "");
@@ -34,6 +34,8 @@ namespace AuroraOs.Engine.Core.Services
             _lastFmClient = new LastfmClient(_apiKey, _apiSecret);
 
             _logger.Info("Last FM client is ready");    
+
+            return Task.CompletedTask;
         }
 
 

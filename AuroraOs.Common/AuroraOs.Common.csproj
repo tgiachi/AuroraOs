@@ -105,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AppUtils.cs" />
+    <Compile Include="Core\Attributes\AiActionAttribute.cs" />
+    <Compile Include="Core\Attributes\AiExecutingActionAttribute.cs" />
+    <Compile Include="Core\Attributes\AuroraReporitoryAttribute.cs" />
     <Compile Include="Core\Attributes\AuroraServiceAttribute.cs" />
     <Compile Include="Core\Attributes\DataGeneratorInfoAttribute.cs" />
     <Compile Include="Core\Attributes\MediaServiceTypeAttribute.cs" />
@@ -121,9 +124,12 @@
     <Compile Include="Core\Data\Dto\GraphDataDetail.cs" />
     <Compile Include="Core\Data\Dto\OwnTracksLocation.cs" />
     <Compile Include="Core\Data\Dto\SensorAvaiableDto.cs" />
+    <Compile Include="Core\Data\Dto\ServiceInfo.cs" />
     <Compile Include="Core\Data\Dto\WeatherInfo.cs" />
     <Compile Include="Core\Data\EmotionData.cs" />
     <Compile Include="Core\Data\Errors\SensorError.cs" />
+    <Compile Include="Core\Data\Events\AiRequestSpeechEvent.cs" />
+    <Compile Include="Core\Data\Events\AiSpeechResultEvent.cs" />
     <Compile Include="Core\Data\Events\MqttSendEvent.cs" />
     <Compile Include="Core\Data\Events\MqttSendMessageEvent.cs" />
     <Compile Include="Core\Data\Events\SensorAddedEvent.cs" />

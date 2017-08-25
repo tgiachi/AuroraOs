@@ -59,9 +59,16 @@ namespace AuroraOs.Engine.Core.Services
             }));
 
 
+         
+        }
+
+        public Task Init()
+        {
             TestSensors();
 
             InitSersorHandlers();
+
+            return Task.CompletedTask;
         }
 
         public List<BaseIot> GetSensors()
