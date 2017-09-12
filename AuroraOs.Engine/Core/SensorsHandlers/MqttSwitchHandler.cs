@@ -62,10 +62,10 @@ namespace AuroraOs.Engine.Core.SensorsHandlers
 
                     if (mSwitch != null)
                     {
-                        if (str == mSwitch.Switch.PayloadOn)
+                        if (str.Contains(mSwitch.Switch.PayloadOn))
                             mSwitch.Status = true;
 
-                        if (str == mSwitch.Switch.PayloadOff)
+                        if (str.Contains(mSwitch.Switch.PayloadOff))
                             mSwitch.Status = false;
                     }
 

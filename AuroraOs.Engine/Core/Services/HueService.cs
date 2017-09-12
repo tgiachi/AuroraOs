@@ -42,7 +42,7 @@ namespace AuroraOs.Engine.Core.Services
                     hueClient = new LocalHueClient(bridgeIPs.FirstOrDefault().IpAddress);
                     _logger.Info($"Found bridgeId: {bridgeIPs.FirstOrDefault().BridgeId}");
 
-                    apiKey = await hueClient.RegisterAsync("AuroraOS", "AuroraOS");
+                    apiKey = await hueClient.RegisterAsync("AuroraOS2", "AuroraOS2");
 
                     ConfigManager.Instance.SetConfig<HueService>("apiKey", apiKey);
                     ConfigManager.Instance.SetConfig<HueService>("bridgeIpAddress", bridgeIPs.FirstOrDefault().IpAddress);

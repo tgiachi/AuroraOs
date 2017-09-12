@@ -80,14 +80,14 @@ namespace AuroraOs.Engine.Core.Services
         {
             var testMq = new MqttSwitch()
             {
-                CommandTopic = "home/bedroom/switch1/set",
-                StateTopic = "home/bedroom/switch1",
-                Room = "Bedroom",
-                Name = "Switch Bedroom",
+                CommandTopic = "cmnd/SalaUp/POWER",
+                StateTopic = "stat/SalaUp/RESULT",
+                Room = "Sala",
+                Name = "SalaUp",
                 Type = typeof(MqttSwitch).Name
             };
 
-            File.WriteAllText($"{ConfigManager.Instance.GetPath("sensors")}switch1_bedroom_switch.sensor", JsonConvert.SerializeObject(testMq));
+            File.WriteAllText($"{ConfigManager.Instance.GetPath("sensors")}salaUp_switch.sensor", JsonConvert.SerializeObject(testMq));
 
             var testSensor = new MqttSensor()
             {

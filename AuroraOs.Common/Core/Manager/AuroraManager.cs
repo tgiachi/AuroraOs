@@ -107,7 +107,19 @@ namespace AuroraOs.Common.Core.Manager
                     var ausService = Container.Resolve(service) as IAuroraService;
 
                     if (ausService != null)
-                        Task.Run(() => ausService?.Init());
+                        Task.Run(() => {
+                            try
+                            {
+                                ausService?.Init();
+                            }
+                            catch(Exception ex)
+                            {
+                                _logger.Error($"Error during post-start service {service.Name} => {ex}");
+                                _logger.Error(ex);
+                            }
+                           
+                        }
+                        );
 
                     var srv = Container.Resolve(service) as IDelayedService;
 
